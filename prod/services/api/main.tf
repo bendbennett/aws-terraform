@@ -12,8 +12,9 @@ data "terraform_remote_state" "vpc" {
   }
 }
 
-module "security-group" {
+module "security-group" "security_group_load_balancer_web" {
   source = "../../../modules/aws/security-group"
 
+  security_group_rules_cidr_blocks = "${var.security_group_rules_cidr_blocks_load_balancer_web}"
   vpc_id = "${data.terraform_remote_state.vpc.vpc_id}"
 }
