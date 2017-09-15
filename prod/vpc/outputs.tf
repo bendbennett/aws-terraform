@@ -9,3 +9,7 @@ output "internet_gateway_id" {
 output "nat_gateway_ids" {
   value = "${module.subnet-public.nat_gateway_ids}"
 }
+
+output "subnet_ids_public" {
+  value = "${module.subnet-public.subnet_ids}"
+}
