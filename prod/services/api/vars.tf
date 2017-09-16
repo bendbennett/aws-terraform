@@ -28,3 +28,36 @@ variable "security_group_rules_cidr_blocks_load_balancer_web" {
     }
   ]
 }
+
+variable "load_balancer_web" {
+  type = "map"
+  default = {
+    cross_zone_load_balancing = true
+    name = "load-balancer-web"
+  }
+}
+
+variable "security_group_rules_source_security_group_id_ec2_instance_web" {
+  type = "list"
+  default = [
+    {
+      from_port = 80,
+      protocol = "tcp"
+      to_port = 80,
+      type = "ingress"
+    }
+  ]
+}
+
+variable "security_group_rules_cidr_blocks_ec2_instance_web" {
+  type = "list"
+  default = [
+    {
+      cidr_blocks = "0.0.0.0/0",
+      from_port = 0,
+      protocol = "-1"
+      to_port = 0,
+      type = "egress"
+    }
+  ]
+}
