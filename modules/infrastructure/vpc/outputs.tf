@@ -3,9 +3,9 @@ output "vpc_id" {
 }
 
 output "subnet_ids_public" {
-  value = "${module.vpc.subnet_ids_public}"
+  value = "${module.subnet-public.subnet_ids}"
 }
 
 output "subnet_ids_private" {
-  value = "${module.vpc.subnet_ids_private}"
+  value = "${module.subnet-private.subnet_ids}"
 }
