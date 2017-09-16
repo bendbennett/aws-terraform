@@ -61,3 +61,28 @@ variable "security_group_rules_cidr_blocks_ec2_instance_web" {
     }
   ]
 }
+
+variable "security_group_rules_source_security_group_id_ec2_instance_mongo" {
+  type = "list"
+  default = [
+    {
+      from_port = 27017,
+      protocol = "tcp"
+      to_port = 27017,
+      type = "ingress"
+    }
+  ]
+}
+
+variable "security_group_rules_cidr_blocks_ec2_instance_mongo" {
+  type = "list"
+  default = [
+    {
+      cidr_blocks = "0.0.0.0/0",
+      from_port = 0,
+      protocol = "-1"
+      to_port = 0,
+      type = "egress"
+    }
+  ]
+}
