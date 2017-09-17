@@ -12,6 +12,14 @@ data "terraform_remote_state" "vpc" {
   }
 }
 
+data "terraform_remote_state" "iam" {
+  backend = "local"
+
+  config {
+    path = "../../../global/iam/state/terraform.tfstate"
+  }
+}
+
 module "api" {
   source = "../../../modules/infrastructure/services/api"
 
@@ -24,4 +32,5 @@ module "api" {
   security_group_rules_source_security_group_id_ec2_instance_mongo = "${var.security_group_rules_source_security_group_id_ec2_instance_mongo}"
   security_group_rules_cidr_blocks_ec2_instance_mongo = "${var.security_group_rules_cidr_blocks_ec2_instance_mongo}"
   security_group_rules_self_ec2_instance_mongo = "${var.security_group_rules_source_security_group_id_ec2_instance_mongo}"
+  iam_role_name = "${data.terraform_remote_state.iam.iam_role_name}"
 }

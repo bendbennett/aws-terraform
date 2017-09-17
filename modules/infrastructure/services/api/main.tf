@@ -32,3 +32,9 @@ module "security_group_ec2_instance_mongo" {
   security_group_rules_self = "${var.security_group_rules_self_ec2_instance_mongo}"
   vpc_id = "${var.vpc_id}"
 }
+
+module "role_launch_configuration_instance_profile" {
+  source = "../../../components/aws/iam-instance-profile"
+
+  iam_role_name = "${var.iam_role_name}"
+}

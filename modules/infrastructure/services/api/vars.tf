@@ -15,3 +15,5 @@ variable "security_group_rules_self_ec2_instance_mongo" { type = "list" }
 variable "subnet_ids_public" { type = "list" }
 
 variable "vpc_id" {}
+
+variable "iam_role_name" {}
