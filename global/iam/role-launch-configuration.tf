@@ -4,7 +4,7 @@ terraform {
   }
 }
 
-data "aws_iam_policy_document" "iam_policy_document_iam_role" {
+data "aws_iam_policy_document" "iam_policy_document_iam_role_launch_configuration" {
   statement {
     effect = "Allow"
     actions = [
@@ -13,12 +13,13 @@ data "aws_iam_policy_document" "iam_policy_document_iam_role" {
     principals {
       type = "Service"
       identifiers = [
-        "ec2.amazonaws.com"]
+        "ec2.amazonaws.com"
+      ]
     }
   }
 }
 
-data "aws_iam_policy_document" "iam_policy_document_iam_role_policy" {
+data "aws_iam_policy_document" "iam_policy_document_iam_role_policy_launch_configuration" {
   statement {
     actions = [
       "ecs:DeregisterContainerInstance",
@@ -76,11 +77,11 @@ data "aws_iam_policy_document" "iam_policy_document_iam_role_policy" {
   }
 }
 
-resource "aws_iam_role_policy" "iam_role_policy" {
-  policy = "${data.aws_iam_policy_document.iam_policy_document_iam_role_policy.json}"
-  role = "${aws_iam_role.iam_role.id}"
+resource "aws_iam_role_policy" "iam_role_policy_launch_configuration" {
+  policy = "${data.aws_iam_policy_document.iam_policy_document_iam_role_policy_launch_configuration.json}"
+  role = "${aws_iam_role.iam_role_launch_configuration.id}"
 }
 
-resource "aws_iam_role" "iam_role" {
-  assume_role_policy = "${data.aws_iam_policy_document.iam_policy_document_iam_role.json}"
+resource "aws_iam_role" "iam_role_launch_configuration" {
+  assume_role_policy = "${data.aws_iam_policy_document.iam_policy_document_iam_role_launch_configuration.json}"
 }
