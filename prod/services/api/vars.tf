@@ -1,7 +1,3 @@
-provider "aws" {
-  region = "eu-west-1"
-}
-
 variable "security_group_rules_cidr_blocks_load_balancer_web" {
   type = "list"
   default = [

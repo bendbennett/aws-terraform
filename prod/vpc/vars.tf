@@ -1,7 +1,3 @@
-provider "aws" {
-  region = "eu-west-1"
-}
-
 variable "cidr_block_vpc" {
   default = "10.0.0.0/16"
 }
