@@ -82,3 +82,11 @@ variable "security_group_rules_cidr_blocks_ec2_instance_mongo" {
     }
   ]
 }
+
+variable "log_group" {
+  type = "map"
+  default = {
+    name = "symfony-api-swagger-jwt"
+    retention_in_days = 3
+  }
+}

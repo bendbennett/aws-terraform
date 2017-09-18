@@ -38,3 +38,10 @@ module "role_launch_configuration_instance_profile" {
 
   iam_role_name = "${var.iam_role_name}"
 }
+
+module "log_group" {
+  source = "../../../components/aws/log-group"
+
+  name = "${var.log_group["name"]}"
+  retention_in_days = "${var.log_group["retention_in_days"]}"
+}
