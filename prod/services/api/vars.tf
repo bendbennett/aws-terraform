@@ -90,3 +90,7 @@ variable "log_group" {
     retention_in_days = 3
   }
 }
+
+variable "ecs_cluster_name" {
+  default = "cluster-mongo"
+}

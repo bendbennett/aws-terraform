@@ -19,3 +19,5 @@ variable "vpc_id" {}
 variable "iam_role_name" {}
 
 variable "log_group" { type = "map"}
+
+variable "ecs_cluster_name" {}

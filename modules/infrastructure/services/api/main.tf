@@ -45,3 +45,9 @@ module "log_group" {
   name = "${var.log_group["name"]}"
   retention_in_days = "${var.log_group["retention_in_days"]}"
 }
+
+module "ecs_cluster" {
+  source = "../../../components/aws/ecs-cluster"
+
+  name = "${var.ecs_cluster_name}"
+}

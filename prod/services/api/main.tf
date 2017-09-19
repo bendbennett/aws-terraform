@@ -34,4 +34,5 @@ module "api" {
   security_group_rules_self_ec2_instance_mongo = "${var.security_group_rules_source_security_group_id_ec2_instance_mongo}"
   iam_role_name = "${data.terraform_remote_state.iam.iam_role_launch_configuration_name}"
   log_group = "${var.log_group}"
+  ecs_cluster_name = "${var.ecs_cluster_name}"
 }
