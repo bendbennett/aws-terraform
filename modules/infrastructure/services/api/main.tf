@@ -46,8 +46,34 @@ module "log_group" {
   retention_in_days = "${var.log_group["retention_in_days"]}"
 }
 
-module "ecs_cluster" {
+module "ecs_cluster_mongo" {
   source = "../../../components/aws/ecs-cluster"
 
   name = "${var.ecs_cluster_name}"
+}
+
+data "template_file" "launch_configuration_mongo_user_data" {
+  template = "${var.launch_configuration_mongo_user_data_template}"
+
+  vars {
+    cluster_id = "${module.ecs_cluster_mongo.ecs_cluster_id}"
+  }
+}
+
+module "launch_configuration_autoscaling_group_mongo" {
+  source = "../../../components/aws/launch-configuration-autoscaling-group"
+
+  associate_public_ip_address = "${var.launch_configuration_mongo["associate_public_ip_address"]}"
+  iam_instance_profile = "${module.role_launch_configuration_instance_profile.iam_instance_profile_id}"
+  image_id = "${var.launch_configuration_mongo["image_id"]}"
+  instance_type = "${var.launch_configuration_mongo["instance_type"]}"
+  key_name = "${var.key_name}"
+  security_groups = ["${module.security_group_ec2_instance_mongo.security_group_id}"]
+  user_data = "${data.template_file.launch_configuration_mongo_user_data.rendered}"
+
+  desired_capacity = "${var.autoscaling_group_mongo["desired_capacity"]}"
+  health_check_type = "${var.autoscaling_group_mongo["health_check_type"]}"
+  max_size = "${var.autoscaling_group_mongo["max_size"]}"
+  min_size = "${var.autoscaling_group_mongo["min_size"]}"
+  vpc_zone_identifier =  "${var.subnet_ids_private}"
 }

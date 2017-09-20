@@ -1,2 +1,4 @@
 .terraform
 state
+private.tf
+vars-private.tf

@@ -94,3 +94,22 @@ variable "log_group" {
 variable "ecs_cluster_name" {
   default = "cluster-mongo"
 }
+
+variable "launch_configuration_mongo" {
+  type = "map"
+  default = {
+    associate_public_ip_address = false
+    image_id = "ami-8fcc32f6"
+    instance_type = "t2.micro"
+  }
+}
+
+variable "autoscaling_group_mongo" {
+  type = "map"
+  default = {
+    desired_capacity = 3
+    health_check_type = "EC2"
+    max_size = 3
+    min_size = 1
+  }
+}

@@ -35,4 +35,9 @@ module "api" {
   iam_role_name = "${data.terraform_remote_state.iam.iam_role_launch_configuration_name}"
   log_group = "${var.log_group}"
   ecs_cluster_name = "${var.ecs_cluster_name}"
+  launch_configuration_mongo_user_data_template = "${file("mongo_user_data.sh")}"
+  launch_configuration_mongo = "${var.launch_configuration_mongo}"
+  key_name = "${var.key_name}"
+  autoscaling_group_mongo = "${var.autoscaling_group_mongo}"
+  subnet_ids_private = "${data.terraform_remote_state.vpc.subnet_ids_private}"
 }
