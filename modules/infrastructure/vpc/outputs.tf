@@ -9,3 +9,7 @@ output "subnet_ids_public" {
 output "subnet_ids_private" {
   value = "${module.subnet-private.subnet_ids}"
 }
+
+output "hosted_zone_id" {
+  value = "${module.hosted-zone-private.hosted_zone_id}"
+}

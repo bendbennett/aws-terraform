@@ -28,3 +28,11 @@ variable "cidr_blocks_private" {
     "10.0.130.0/24"
   ]
 }
+
+variable "hosted_zone_private" {
+  type = "map"
+  default = {
+    force_destroy = true
+    name = "internal.synaptology.net."
+  }
+}

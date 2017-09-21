@@ -23,3 +23,11 @@ module "subnet-private" {
   public_subnet = false
   vpc_id = "${module.vpc.vpc_id}"
 }
+
+module "hosted-zone-private" {
+  source = "../../components/aws/hosted-zone"
+
+  force_destroy = "${var.hosted_zone_private["force_destroy"]}"
+  name = "${var.hosted_zone_private["name"]}"
+  vpc_id = "${module.vpc.vpc_id}"
+}
