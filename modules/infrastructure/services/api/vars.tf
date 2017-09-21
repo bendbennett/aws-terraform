@@ -24,6 +24,8 @@ variable "log_group" { type = "map"}
 
 variable "ecs_cluster_name" {}
 
+variable "hosted_zone_id" {}
+
 variable "launch_configuration_mongo_user_data_template" {}
 
 variable "launch_configuration_mongo" { type = "map"}

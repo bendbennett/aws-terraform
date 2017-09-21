@@ -58,6 +58,7 @@ data "template_file" "launch_configuration_mongo_user_data" {
 
   vars {
     cluster_id = "${module.ecs_cluster_mongo.ecs_cluster_id}"
+    hosted_zone_id = "${var.hosted_zone_id}"
   }
 }
 

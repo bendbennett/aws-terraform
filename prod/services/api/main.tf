@@ -36,6 +36,7 @@ module "api" {
   iam_role_name = "${data.terraform_remote_state.iam.iam_role_launch_configuration_name}"
   log_group = "${var.log_group}"
   ecs_cluster_name = "${var.ecs_cluster_name}"
+  hosted_zone_id = "${data.terraform_remote_state.vpc.hosted_zone_id}"
   launch_configuration_mongo_user_data_template = "${file("mongo_user_data.sh")}"
   launch_configuration_mongo = "${var.launch_configuration_mongo}"
   key_name = "${var.key_name}"
