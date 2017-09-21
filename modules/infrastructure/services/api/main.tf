@@ -11,6 +11,7 @@ module "load_balancer_web" {
   security_groups = ["${module.security_group_load_balancer_web.security_group_id}"]
   cross_zone_load_balancing = "${var.load_balancer_web["cross_zone_load_balancing"]}"
   name = "${var.load_balancer_web["name"]}"
+  ssl_certificate_id = "${var.ssl_certificate_id}"
   subnets = "${var.subnet_ids_public}"
 }
 
