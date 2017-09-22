@@ -35,3 +35,11 @@ variable "key_name" {}
 variable "autoscaling_group_mongo" { type = "map"}
 
 variable "subnet_ids_private" { type = "list" }
+
+variable "task_definition_mongo" { type = "map" }
+
+variable "task_definition_mongo_container_definitions" {}
+
+variable "service_mongo" { type = "map" }
+
+//variable "service_mongo_iam_role_arn" {}

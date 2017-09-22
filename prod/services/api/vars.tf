@@ -113,3 +113,19 @@ variable "autoscaling_group_mongo" {
     min_size = 1
   }
 }
+
+variable "task_definition_mongo" {
+  type = "map"
+  default = {
+    family = "mongo"
+  }
+}
+
+variable "service_mongo" {
+  type = "map"
+  default = {
+    deployment_minimum_healthy_percent = 50
+    desired_count = 3
+    name = "mongo"
+  }
+}

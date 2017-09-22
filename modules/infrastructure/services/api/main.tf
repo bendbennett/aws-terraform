@@ -79,3 +79,16 @@ module "launch_configuration_autoscaling_group_mongo" {
   min_size = "${var.autoscaling_group_mongo["min_size"]}"
   vpc_zone_identifier =  "${var.subnet_ids_private}"
 }
+
+module "ecs_task_definition_service_mongo" {
+  source = "../../../components/aws/ecs-task-definition-service"
+
+  container_definitions = "${var.task_definition_mongo_container_definitions}"
+  family = "${var.task_definition_mongo["family"]}"
+
+  cluster_id = "${module.ecs_cluster_mongo.ecs_cluster_id}"
+  deployment_minimum_healthy_percent = "${var.service_mongo["deployment_minimum_healthy_percent"]}"
+  desired_count = "${var.service_mongo["desired_count"]}"
+//  iam_role_arn = "${var.service_mongo_iam_role_arn}"
+  name = "${var.service_mongo["name"]}"
+}
