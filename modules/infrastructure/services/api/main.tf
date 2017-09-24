@@ -50,7 +50,7 @@ module "log_group" {
 module "ecs_cluster_mongo" {
   source = "../../../components/aws/ecs-cluster"
 
-  name = "${var.ecs_cluster_name}"
+  name = "${var.ecs_cluster_name_mongo}"
 }
 
 data "template_file" "launch_configuration_mongo_user_data" {
@@ -89,6 +89,55 @@ module "ecs_task_definition_service_mongo" {
   cluster_id = "${module.ecs_cluster_mongo.ecs_cluster_id}"
   deployment_minimum_healthy_percent = "${var.service_mongo["deployment_minimum_healthy_percent"]}"
   desired_count = "${var.service_mongo["desired_count"]}"
-//  iam_role_arn = "${var.service_mongo_iam_role_arn}"
+  load_balancer = "${var.service_mongo["load_balancer"]}"
   name = "${var.service_mongo["name"]}"
+}
+
+module "ecs_cluster_web" {
+  source = "../../../components/aws/ecs-cluster"
+
+  name = "${var.ecs_cluster_name_web}"
+}
+
+data "template_file" "launch_configuration_web_user_data" {
+  template = "${var.launch_configuration_web_user_data_template}"
+
+  vars {
+    cluster_id = "${module.ecs_cluster_web.ecs_cluster_id}"
+  }
+}
+
+module "launch_configuration_autoscaling_group_web" {
+  source = "../../../components/aws/launch-configuration-autoscaling-group"
+
+  associate_public_ip_address = "${var.launch_configuration_web["associate_public_ip_address"]}"
+  iam_instance_profile = "${module.role_launch_configuration_instance_profile.iam_instance_profile_id}"
+  image_id = "${var.launch_configuration_web["image_id"]}"
+  instance_type = "${var.launch_configuration_web["instance_type"]}"
+  key_name = "${var.key_name}"
+  security_groups = ["${module.security_group_ec2_instance_web.security_group_id}"]
+  user_data = "${data.template_file.launch_configuration_web_user_data.rendered}"
+
+  desired_capacity = "${var.autoscaling_group_web["desired_capacity"]}"
+  health_check_type = "${var.autoscaling_group_web["health_check_type"]}"
+  max_size = "${var.autoscaling_group_web["max_size"]}"
+  min_size = "${var.autoscaling_group_web["min_size"]}"
+  vpc_zone_identifier =  "${var.subnet_ids_private}"
+}
+
+module "ecs_task_definition_service_web" {
+  source = "../../../components/aws/ecs-task-definition-service"
+
+  container_definitions = "${var.task_definition_web_container_definitions}"
+  family = "${var.task_definition_web["family"]}"
+
+  cluster_id = "${module.ecs_cluster_web.ecs_cluster_id}"
+  container_name = "${var.service_web["container_name"]}"
+  container_port = "${var.service_web["container_port"]}"
+  deployment_minimum_healthy_percent = "${var.service_web["deployment_minimum_healthy_percent"]}"
+  desired_count = "${var.service_web["desired_count"]}"
+  iam_role_arn = "${var.service_web_iam_role_arn}"
+  load_balancer = "${var.service_web["load_balancer"]}"
+  load_balancer_name = "${module.load_balancer_web.load_balancer_name}"
+  name = "${var.service_web["name"]}"
 }

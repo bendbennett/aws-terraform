@@ -1,0 +1,67 @@
+[
+  {
+    "name": "nginx",
+    "cpu": 256,
+    "essential": true,
+    "image": "bendbennett/nginx:v0.1.0",
+    "links": [
+      "php"
+    ],
+    "logConfiguration": {
+      "logDriver": "awslogs",
+      "options": {
+        "awslogs-region": "eu-west-1",
+        "awslogs-group": "symfony-api-swagger-jwt",
+        "awslogs-stream-prefix": "nginx"
+      }
+    },
+    "memory": 128,
+    "portMappings": [
+      {
+        "containerPort": 80,
+        "hostPort": 80
+      }
+    ],
+    "volumesFrom": [
+      {
+        "sourceContainer": "src",
+        "readOnly": false
+      }
+    ]
+  },
+  {
+    "name": "php",
+    "cpu": 756,
+    "environment": [
+      {
+        "name": "SY_MONGODB_SERVER",
+        "value": "mongodb://mongo-rs1.internal.synaptology.net:27017,mongo-rs2.internal.synaptology.net:27017,mongo-rs3.internal.synaptology.net:27017/?replicaSet=rs0"
+      }
+    ],
+    "essential": true,
+    "image": "bendbennett/php7-fpm:v0.3.0",
+    "logConfiguration": {
+      "logDriver": "awslogs",
+      "options": {
+        "awslogs-region": "eu-west-1",
+        "awslogs-group": "symfony-api-swagger-jwt",
+        "awslogs-stream-prefix": "php-fpm"
+      }
+    },
+    "memory": 853,
+    "volumesFrom": [
+      {
+        "sourceContainer": "src",
+        "readOnly": false
+      }
+    ]
+  },
+  {
+    "name": "src",
+    "command": [ "ping", "127.0.0.1", "-q" ],
+    "cpu": 12,
+    "essential": true,
+    "image": "bendbennett/symfony-api-swagger-jwt-src:v0.1.0",
+    "memory": 12
+  }
+]

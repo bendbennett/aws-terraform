@@ -22,7 +22,7 @@ variable "iam_role_name" {}
 
 variable "log_group" { type = "map"}
 
-variable "ecs_cluster_name" {}
+variable "ecs_cluster_name_mongo" {}
 
 variable "hosted_zone_id" {}
 
@@ -42,4 +42,18 @@ variable "task_definition_mongo_container_definitions" {}
 
 variable "service_mongo" { type = "map" }
 
-//variable "service_mongo_iam_role_arn" {}
+variable "ecs_cluster_name_web" {}
+
+variable "launch_configuration_web_user_data_template" {}
+
+variable "launch_configuration_web" { type = "map"}
+
+variable "autoscaling_group_web" { type = "map"}
+
+variable "task_definition_web" { type = "map" }
+
+variable "task_definition_web_container_definitions" {}
+
+variable "service_web" { type = "map" }
+
+variable "service_web_iam_role_arn" {}

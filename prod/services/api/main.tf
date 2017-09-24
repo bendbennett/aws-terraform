@@ -35,7 +35,8 @@ module "api" {
   security_group_rules_self_ec2_instance_mongo = "${var.security_group_rules_source_security_group_id_ec2_instance_mongo}"
   iam_role_name = "${data.terraform_remote_state.iam.iam_role_launch_configuration_name}"
   log_group = "${var.log_group}"
-  ecs_cluster_name = "${var.ecs_cluster_name}"
+
+  ecs_cluster_name_mongo = "${var.ecs_cluster_name_mongo}"
   hosted_zone_id = "${data.terraform_remote_state.vpc.hosted_zone_id}"
   launch_configuration_mongo_user_data_template = "${file("templates/mongo_user_data.sh")}"
   launch_configuration_mongo = "${var.launch_configuration_mongo}"
@@ -45,5 +46,13 @@ module "api" {
   task_definition_mongo = "${var.task_definition_mongo}"
   task_definition_mongo_container_definitions = "${file("templates/mongo_task_definition_container_definitions.json")}"
   service_mongo = "${var.service_mongo}"
-//  service_mongo_iam_role_arn = "${data.terraform_remote_state.iam.iam_role_ecs_service_arn}"
+
+  ecs_cluster_name_web = "${var.ecs_cluster_name_web}"
+  launch_configuration_web_user_data_template = "${file("templates/web_user_data.sh")}"
+  launch_configuration_web = "${var.launch_configuration_web}"
+  autoscaling_group_web = "${var.autoscaling_group_web}"
+  task_definition_web = "${var.task_definition_web}"
+  task_definition_web_container_definitions = "${file("templates/web_task_definition_container_definitions.json")}"
+  service_web = "${var.service_web}"
+  service_web_iam_role_arn = "${data.terraform_remote_state.iam.iam_role_ecs_service_arn}"
 }

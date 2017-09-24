@@ -91,7 +91,7 @@ variable "log_group" {
   }
 }
 
-variable "ecs_cluster_name" {
+variable "ecs_cluster_name_mongo" {
   default = "cluster-mongo"
 }
 
@@ -126,6 +126,49 @@ variable "service_mongo" {
   default = {
     deployment_minimum_healthy_percent = 50
     desired_count = 3
+    load_balancer = false
     name = "mongo"
+  }
+}
+
+variable "ecs_cluster_name_web" {
+  default = "cluster-web"
+}
+
+variable "launch_configuration_web" {
+  type = "map"
+  default = {
+    associate_public_ip_address = false
+    image_id = "ami-8fcc32f6"
+    instance_type = "t2.micro"
+  }
+}
+
+variable "autoscaling_group_web" {
+  type = "map"
+  default = {
+    desired_capacity = 3
+    health_check_type = "EC2"
+    max_size = 3
+    min_size = 1
+  }
+}
+
+variable "task_definition_web" {
+  type = "map"
+  default = {
+    family = "web"
+  }
+}
+
+variable "service_web" {
+  type = "map"
+  default = {
+    container_name = "nginx"
+    container_port = 80
+    deployment_minimum_healthy_percent = 50
+    desired_count = 3
+    load_balancer = true
+    name = "web"
   }
 }
