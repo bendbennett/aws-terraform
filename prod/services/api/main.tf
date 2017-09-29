@@ -55,4 +55,9 @@ module "api" {
   task_definition_web_container_definitions = "${file("templates/web_task_definition_container_definitions.json")}"
   service_web = "${var.service_web}"
   service_web_iam_role_arn = "${data.terraform_remote_state.iam.iam_role_ecs_service_arn}"
+
+  record_set_load_balancer_web = "${var.load_balancer_web_record_set}"
+
+  hosted_zone_public_name = "${var.hosted_zone_public_name}"
+  hosted_zone_public_id = "${var.hosted_zone_public_id}"
 }

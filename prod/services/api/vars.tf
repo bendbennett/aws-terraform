@@ -172,3 +172,11 @@ variable "service_web" {
     name = "web"
   }
 }
+
+variable "load_balancer_web_record_set" {
+  type = "map"
+  default = {
+    ttl = 60
+    type = "CNAME"
+  }
+}

@@ -57,3 +57,9 @@ variable "task_definition_web_container_definitions" {}
 variable "service_web" { type = "map" }
 
 variable "service_web_iam_role_arn" {}
+
+variable "record_set_load_balancer_web" { type="map" }
+
+variable "hosted_zone_public_name" {}
+
+variable "hosted_zone_public_id" {}

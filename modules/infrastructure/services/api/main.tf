@@ -141,3 +141,13 @@ module "ecs_task_definition_service_web" {
   load_balancer_name = "${module.load_balancer_web.load_balancer_name}"
   name = "${var.service_web["name"]}"
 }
+
+module "record_set_load_balancer_web" {
+  source = "../../../components/aws/record-set/"
+
+  name = "demo.${var.hosted_zone_public_name}"
+  records = ["${module.load_balancer_web.load_balancer_dns_name}"]
+  ttl = "${var.record_set_load_balancer_web["ttl"]}"
+  type = "${var.record_set_load_balancer_web["type"]}"
+  zone_id = "${var.hosted_zone_public_id}"
+}
