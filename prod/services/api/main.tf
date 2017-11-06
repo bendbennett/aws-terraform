@@ -12,11 +12,11 @@ data "terraform_remote_state" "vpc" {
   }
 }
 
-data "terraform_remote_state" "iam" {
+data "terraform_remote_state" "global" {
   backend = "local"
 
   config {
-    path = "../../../global/iam/state/terraform.tfstate"
+    path = "../../../global/state/terraform.tfstate"
   }
 }
 
@@ -33,7 +33,7 @@ module "api" {
   security_group_rules_source_security_group_id_ec2_instance_mongo = "${var.security_group_rules_source_security_group_id_ec2_instance_mongo}"
   security_group_rules_cidr_blocks_ec2_instance_mongo = "${var.security_group_rules_cidr_blocks_ec2_instance_mongo}"
   security_group_rules_self_ec2_instance_mongo = "${var.security_group_rules_source_security_group_id_ec2_instance_mongo}"
-  iam_role_name = "${data.terraform_remote_state.iam.iam_role_launch_configuration_name}"
+  iam_role_name = "${data.terraform_remote_state.global.iam_role_launch_configuration_name}"
   log_group = "${var.log_group}"
 
   ecs_cluster_name_mongo = "${var.ecs_cluster_name_mongo}"
@@ -54,7 +54,7 @@ module "api" {
   task_definition_web = "${var.task_definition_web}"
   task_definition_web_container_definitions = "${file("templates/web_task_definition_container_definitions.json")}"
   service_web = "${var.service_web}"
-  service_web_iam_role_arn = "${data.terraform_remote_state.iam.iam_role_ecs_service_arn}"
+  service_web_iam_role_arn = "${data.terraform_remote_state.global.iam_role_ecs_service_arn}"
 
   record_set_load_balancer_web = "${var.load_balancer_web_record_set}"
 
