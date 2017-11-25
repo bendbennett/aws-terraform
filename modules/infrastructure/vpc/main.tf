@@ -28,6 +28,6 @@ module "hosted-zone-private" {
   source = "../../components/aws/hosted-zone"
 
   force_destroy = "${var.hosted_zone_private["force_destroy"]}"
-  name = "${var.hosted_zone_private["name"]}"
+  name = "${var.hosted_zone_private_prefix}.${var.hosted_zone_public_name}."
   vpc_id = "${module.vpc.vpc_id}"
 }

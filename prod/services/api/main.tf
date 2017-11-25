@@ -52,7 +52,7 @@ module "api" {
   launch_configuration_web = "${var.launch_configuration_web}"
   autoscaling_group_web = "${var.autoscaling_group_web}"
   task_definition_web = "${var.task_definition_web}"
-  task_definition_web_container_definitions = "${file("templates/web_task_definition_container_definitions.json")}"
+  task_definition_web_container_definitions_template = "${file("templates/web_task_definition_container_definitions.json")}"
   service_web = "${var.service_web}"
   service_web_iam_role_arn = "${data.terraform_remote_state.global.iam_role_ecs_service_arn}"
 
@@ -60,4 +60,7 @@ module "api" {
 
   hosted_zone_public_name = "${var.hosted_zone_public_name}"
   hosted_zone_public_id = "${var.hosted_zone_public_id}"
+  hosted_zone_private_prefix = "${var.hosted_zone_private_prefix}"
+
+  s3_template_bucket = "${var.s3_template_bucket}"
 }

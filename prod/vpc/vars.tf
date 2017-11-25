@@ -33,6 +33,5 @@ variable "hosted_zone_private" {
   type = "map"
   default = {
     force_destroy = true
-    name = "internal.synaptology.net."
   }
 }

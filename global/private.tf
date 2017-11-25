@@ -1,3 +1,7 @@
+variable hosted_zone_private_prefix {
+  default = ""
+}
+
 variable hosted_zone_public_id {
   default = ""
 }
@@ -10,7 +14,10 @@ variable key_name {
   default = ""
 }
 
-variable "ssl_certificate_id" {
+variable s3_template_bucket {
   default = ""
 }
 
+variable "ssl_certificate_id" {
+  default = ""
+}

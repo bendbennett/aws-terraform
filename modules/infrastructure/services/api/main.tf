@@ -59,6 +59,7 @@ data "template_file" "launch_configuration_mongo_user_data" {
   vars {
     cluster_id = "${module.ecs_cluster_mongo.ecs_cluster_id}"
     hosted_zone_id = "${var.hosted_zone_id}"
+    s3_template_bucket = "${var.s3_template_bucket}"
   }
 }
 
@@ -125,10 +126,19 @@ module "launch_configuration_autoscaling_group_web" {
   vpc_zone_identifier =  "${var.subnet_ids_private}"
 }
 
+data "template_file" "task_definition_web_container_definitions" {
+  template = "${var.task_definition_web_container_definitions_template}"
+
+  vars {
+    hosted_zone_private_prefix = "${var.hosted_zone_private_prefix}"
+    hosted_zone_public_name = "${var.hosted_zone_public_name}"
+  }
+}
+
 module "ecs_task_definition_service_web" {
   source = "../../../components/aws/ecs-task-definition-service"
 
-  container_definitions = "${var.task_definition_web_container_definitions}"
+  container_definitions = "${data.template_file.task_definition_web_container_definitions.rendered}"
   family = "${var.task_definition_web["family"]}"
 
   cluster_id = "${module.ecs_cluster_web.ecs_cluster_id}"

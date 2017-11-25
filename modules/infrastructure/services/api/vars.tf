@@ -52,7 +52,7 @@ variable "autoscaling_group_web" { type = "map"}
 
 variable "task_definition_web" { type = "map" }
 
-variable "task_definition_web_container_definitions" {}
+variable "task_definition_web_container_definitions_template" {}
 
 variable "service_web" { type = "map" }
 
@@ -63,3 +63,7 @@ variable "record_set_load_balancer_web" { type="map" }
 variable "hosted_zone_public_name" {}
 
 variable "hosted_zone_public_id" {}
+
+variable "s3_template_bucket" {}
+
+variable "hosted_zone_private_prefix" {}

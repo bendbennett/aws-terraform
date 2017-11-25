@@ -35,7 +35,7 @@
     "environment": [
       {
         "name": "SY_MONGODB_SERVER",
-        "value": "mongodb://mongo-rs1.internal.synaptology.net:27017,mongo-rs2.internal.synaptology.net:27017,mongo-rs3.internal.synaptology.net:27017/?replicaSet=rs0"
+        "value": "mongodb://mongo-rs1.${hosted_zone_private_prefix}.${hosted_zone_public_name}:27017,mongo-rs2.${hosted_zone_private_prefix}.${hosted_zone_public_name}:27017,mongo-rs3.${hosted_zone_private_prefix}.${hosted_zone_public_name}:27017/?replicaSet=rs0"
       }
     ],
     "essential": true,
