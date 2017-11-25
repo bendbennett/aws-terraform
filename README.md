@@ -20,19 +20,14 @@ local development environment can be set-up to run on AWS.
 
         git clone git@github.com:bendbennett/aws-terraform.git
 
-### S3
-
-* [Create an S3 bucket](http://docs.aws.amazon.com/AmazonS3/latest/gsg/CreatingABucket.html)
- called _synaptology-templates_ and upload 
-[scripts/upsert-resource-record-set.sh](../master/scripts/upsert-resource-record-set.sh)
-to this bucket.
-
 ### Register domain name
 
 * Register a domain name using [AWS Route 53](http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/registrar.html).
 * Create a [public hosted zone](http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/AboutHZWorkingWith.html)
 for the domain.
 * Add the public hosted zone id and name to _hosted_zone_public_id_ and _hosted_zone_public_name_
+ in [global/private.tf](../master/global/private.tf).
+* Add the name you want to use to prefix your private hosted zone to _hosted_zone_private_prefix_
  in [global/private.tf](../master/global/private.tf).
 
 ### HTTPS
@@ -43,8 +38,17 @@ for the domain.
 
 ### Key name
 
-* Add the name of the key that you want to user to connect to thne EC2 instances to 
+* Add the name of the key that you want to user to connect to the EC2 instances to 
 _key_name_ in [global/private.tf](../master/global/private.tf).
+
+### S3
+
+* [Create an S3 bucket](http://docs.aws.amazon.com/AmazonS3/latest/gsg/CreatingABucket.html)
+ and add the name of the bucket to _s3_template_bucket_ in [global/private.tf](../master/global/private.tf). 
+* Edit [scripts/upsert-resource-record-set.sh](../master/scripts/upsert-resource-record-set.sh)
+and replace _internal.synaptology.net_ with _hosted_zone_private_prefix_._hosted_zone_public_name_ 
+to this bucket.
+* Upload _upsert-resource-record-set.sh_ to the bucket you just created.
 
 ## Provision IAM roles, VPC and API
 
