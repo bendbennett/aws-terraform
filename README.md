@@ -8,7 +8,7 @@ local development environment can be set-up to run on AWS.
  
 ## Requirements
 
-* Install [Terraform]()
+* Install [Terraform](https://www.terraform.io/intro/getting-started/install.html)
 * Set-up Terraform for [authenticating with the AWS Provider](https://www.terraform.io/docs/providers/aws/).
   * I'm using [environment variables](https://www.terraform.io/docs/providers/aws/#environment-variables) 
   so have just added something like the following to my `~/.bash_profile`
@@ -45,7 +45,7 @@ _key_name_ in [global/private.tf](../master/global/private.tf).
 
 * [Create an S3 bucket](http://docs.aws.amazon.com/AmazonS3/latest/gsg/CreatingABucket.html)
  and add the name of the bucket to _s3_template_bucket_ in [global/private.tf](../master/global/private.tf). 
-* Edit [scripts/upsert-resource-record-set.sh](../master/scripts/upsert-resource-record-set.sh)
+* Edit [global/files/upsert-resource-record-set.sh](../master/global/files/upsert-resource-record-set.sh)
 and replace _internal.synaptology.net_ with _hosted_zone_private_prefix_._hosted_zone_public_name_ 
 to this bucket.
 * Upload _upsert-resource-record-set.sh_ to the bucket you just created.
