@@ -1,7 +1,7 @@
 output "nat_gateway_ids" {
-  value = ["${aws_nat_gateway.nat_gateway.*.id}"]
+  value = "${aws_nat_gateway.nat_gateway.*.id}"
 }
 
 output "subnet_ids" {
-  value = ["${aws_subnet.subnet.*.id}"]
+  value = "${aws_subnet.subnet.*.id}"
 }
