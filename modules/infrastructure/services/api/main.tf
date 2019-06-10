@@ -56,7 +56,7 @@ module "ecs_cluster_mongo" {
 data "template_file" "launch_configuration_mongo_user_data" {
   template = "${var.launch_configuration_mongo_user_data_template}"
 
-  vars {
+  vars = {
     cluster_id = "${module.ecs_cluster_mongo.ecs_cluster_id}"
     hosted_zone_id = "${var.hosted_zone_id}"
     s3_template_bucket = "${var.s3_template_bucket}"
@@ -103,7 +103,7 @@ module "ecs_cluster_web" {
 data "template_file" "launch_configuration_web_user_data" {
   template = "${var.launch_configuration_web_user_data_template}"
 
-  vars {
+  vars = {
     cluster_id = "${module.ecs_cluster_web.ecs_cluster_id}"
   }
 }
@@ -129,7 +129,7 @@ module "launch_configuration_autoscaling_group_web" {
 data "template_file" "task_definition_web_container_definitions" {
   template = "${var.task_definition_web_container_definitions_template}"
 
-  vars {
+  vars = {
     hosted_zone_private_prefix = "${var.hosted_zone_private_prefix}"
     hosted_zone_public_name = "${var.hosted_zone_public_name}"
   }

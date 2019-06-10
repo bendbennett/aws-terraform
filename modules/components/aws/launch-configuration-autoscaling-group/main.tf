@@ -4,7 +4,7 @@ resource "aws_launch_configuration" "launch_configuration" {
   image_id = "${var.image_id}"
   instance_type = "${var.instance_type}"
   key_name = "${var.key_name}"
-  security_groups = ["${var.security_groups}"]
+  security_groups = "${var.security_groups}"
   user_data = "${var.user_data}"
 }
 
@@ -14,5 +14,5 @@ resource "aws_autoscaling_group" "autoscaling_group" {
   launch_configuration = "${aws_launch_configuration.launch_configuration.name}"
   max_size = "${var.max_size}"
   min_size = "${var.min_size}"
-  vpc_zone_identifier = ["${var.vpc_zone_identifier}"]
+  vpc_zone_identifier = "${var.vpc_zone_identifier}"
 }

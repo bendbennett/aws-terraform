@@ -1,6 +1,8 @@
 variable name {}
 
-variable records { type = "list" }
+variable records {
+    type = "list"
+}
 
 variable ttl {}
 

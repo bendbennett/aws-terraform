@@ -14,6 +14,6 @@ resource "aws_elb" "load_balancer" {
   }
   cross_zone_load_balancing = "${var.cross_zone_load_balancing}"
   name = "${var.name}"
-  security_groups = ["${var.security_groups}"]
-  subnets = ["${var.subnets}"]
+  security_groups = "${var.security_groups}"
+  subnets = "${var.subnets}"
 }

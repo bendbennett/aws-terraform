@@ -9,7 +9,9 @@ variable "instance_type" {}
 
 variable "key_name" {}
 
-variable "security_groups" { type = "list" }
+variable "security_groups" {
+    type = "list"
+}
 
 variable user_data {}
 
@@ -22,4 +24,6 @@ variable max_size {}
 
 variable min_size {}
 
-variable vpc_zone_identifier { type = "list" }
+variable vpc_zone_identifier {
+    type = "list"
+}
