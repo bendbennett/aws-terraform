@@ -1,7 +1,7 @@
 [
   {
     "name": "mongo",
-    "image": "bendbennett/mongo-seeded:v0.3.0",
+    "image": "bendbennett/mongo-seeded:4.0",
     "cpu": 1024,
     "memory": 993,
     "essential": true,

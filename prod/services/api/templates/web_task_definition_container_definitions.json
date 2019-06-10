@@ -3,7 +3,7 @@
     "name": "nginx",
     "cpu": 256,
     "essential": true,
-    "image": "bendbennett/nginx:v0.1.0",
+    "image": "bendbennett/nginx:1.17",
     "links": [
       "php"
     ],
@@ -34,12 +34,16 @@
     "cpu": 756,
     "environment": [
       {
-        "name": "SY_MONGODB_SERVER",
+        "name": "APP_ENV",
+        "value": "prod"
+      },
+      {
+        "name": "MONGODB_URL",
         "value": "mongodb://mongo-rs1.${hosted_zone_private_prefix}.${hosted_zone_public_name}:27017,mongo-rs2.${hosted_zone_private_prefix}.${hosted_zone_public_name}:27017,mongo-rs3.${hosted_zone_private_prefix}.${hosted_zone_public_name}:27017/?replicaSet=rs0"
       }
     ],
     "essential": true,
-    "image": "bendbennett/php7-fpm:v0.3.0",
+    "image": "bendbennett/php7-fpm:7.3",
     "logConfiguration": {
       "logDriver": "awslogs",
       "options": {
@@ -61,7 +65,7 @@
     "command": [ "ping", "127.0.0.1", "-q" ],
     "cpu": 12,
     "essential": true,
-    "image": "bendbennett/symfony-api-swagger-jwt-src:v0.1.0",
+    "image": "bendbennett/symfony-api-swagger-jwt-src:4.3",
     "memory": 12
   }
 ]
